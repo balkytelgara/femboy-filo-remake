@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task D: Two Squares</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>  
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task D: Two Squares</h1>
+
+<p>You are given a table with N rows and M columns, where each cell contains a non-negative integer. You need to choose exactly two sub-squares (non-empty) from the table so that they do not intersect, and the sum of the numbers in these squares is maximum. Two squares do not intersect if they have no common cells.</p>
+
+<h2>Input Format</h2>
+<p>In the first line, there are two integers N and M (2 ≤ N, M ≤ 100).</p>
+<p>In the next N lines, there are M integers - the table description. All numbers in the table have values from 0 to 10^5.</p>
+
+<h2>Output Format</h2>
+<p>Output the maximum sum of two non-intersecting squares.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+3 5
+1 2 0 9 2
+3 4 7 2 1
+6 5 3 1 8
+<b>Output:</b>
+51
+</pre>
+
+<pre>
+<b>Input:</b>
+4 4
+2 4 3 1
+1 2 5 4
+9 6 8 7
+5 5 5 5
+<b>Output:</b>
+56
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+height, width = [int(num) for num in input().split(" ")]
+
+rectange = []
+for _ in range(height):
+    rectange.append([int(num) for num in input().split(" ")])
+
+def rect_coll(rect1, rect2):
+    x1, y1, size1 = rect1
+    x2, y2, size2 = rect2
+    return x1 < x2 + size2 and x1 + size1 > x2 and\
+           y1 < y2 + size2 and y1 + size1 > y2
+
+def get_sum(x, y, square_size):
+    s = 0
+    for yo in range(square_size):
+        s += sum(rectange[y + yo][x:x+square_size])
+    return s
+
+if width == height:
+    square_size = width - 1
+else:
+    square_size = min(width, height)
+
+best_sum_1 = 0
+first_square_pos = []
+for x in range(width - square_size + 1):
+    for y in range(height - square_size + 1):
+        value = get_sum(x, y, square_size)
+        if value >= best_sum_1:
+            best_sum_1 = value
+            first_square_pos = (x, y, square_size)
+
+second_square_pos = []
+best_sum_2 = 0
+square_size = max(width, height) - square_size
+while square_size > 0:
+    for x in range(width - square_size + 1):
+        for y in range(height - square_size + 1):
+            if rect_coll(first_square_pos, (x, y, square_size)):
+                continue
+            value = get_sum(x, y, square_size)
+            if value >= best_sum_2:
+                best_sum_2 = value
+                second_square_pos = (x, y, square_size)
+
+    square_size -= 1
+
+print(best_sum_1 + best_sum_2)
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: \( O\left(\frac{n^3}{m^2}\right) \) (very roughly)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>First, we identify the largest possible square with the maximum value. The size of this square cannot be equal to the square of the input data, as we need to accommodate a second square. Next, we determine the size of the second square and iterate through the remaining cells, using <code>rect_coll</code> (rectangle collision) to understand whether the position of the second square is possible or not.</p>
+
+</body>
+</html>

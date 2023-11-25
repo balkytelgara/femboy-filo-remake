@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task A: Dauka and Bauyr</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task A: Dauka and Bauyr</h1>
+
+<p>Dauka and Bauyr are very greedy kids. They collect letters of the English alphabet and cannot share the next letter. To decide who will get the letter, they use their names "daukah" and "bauyr." If the letter appears in Dauka's name before it appears in Bauyr's name, it belongs to Dauka, and vice versa. If the letter appears in both names at the same position, it belongs to both. If the letter is not present in both names, then it belongs to no one.</p>
+
+<h2>Input Format</h2>
+<p>A single line containing a lowercase English alphabet letter.</p>
+
+<h2>Output Format</h2>
+<p>Output "daukah" if Dauka gets the letter, "bauyr" if Bauyr gets the letter, "both" if both get the letter, and "none" if no one gets the letter.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+a
+<b>Output:</b>
+both
+</pre>
+<pre>
+<b>Input:</b>
+b
+<b>Output:</b>
+bauyr
+</pre>
+<pre>
+<b>Input:</b>
+c
+<b>Output:</b>
+none
+</pre>
+<pre>
+<b>Input:</b>
+d
+<b>Output:</b>
+daukah
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/Mazgagzam">@Mazgagzam</a></h4>
+<pre>
+<code>
+a = input()
+s1 = "daukah"
+s2 = "bauyr"
+
+if a in s1 and a in s2:
+    if s1.index(a) < s2.index(a): 
+        print(s1)
+    elif s1.index(a) == s2.index(a):
+       print("both")
+    else:
+       print(s2)
+elif a not in s2 and a in s1:
+    print(s1)
+elif a not in s1 and a in s2:
+    print(s2)
+else:
+    print("none")
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Efficient, passes the tests</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(1)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The solution checks the position of the given letter in the names "daukah" and "bauyr" and determines the owner of the letter based on the specified rules.</p>
+
+</body>
+</html>

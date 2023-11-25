@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem D: Pair of Numbers</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Problem D: Pair of Numbers</h1>
+
+<p>Given an array a consisting of n integers, check if there exist two distinct indices i and j such that ai · aj is equal to the sum of all other numbers in the array.</p>
+
+<h2>Input Format</h2>
+<p>In the first line, the length of the array n is given (3 ≤ n ≤ 105). In the second line, the array itself is given (1 ≤ ai ≤ 105).</p>
+
+<h2>Output Format</h2>
+<p>If there are two elements in the array such that their product is equal to the sum of all other elements, print "YES". Otherwise, print "NO".</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+5
+5 6 3 2 7
+<b>Output:</b>
+YES
+</pre>
+<pre>
+<b>Input:</b>
+4
+1 2 3 6
+<b>Output:</b>
+NO
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+n = int(input())
+a = sorted([*map(int, input().split())])
+s = sum(a)
+l = 0
+r = n - 1
+
+while l < r:
+    if a[l] * a[r] < s - a[l] - a[r]:
+        l += 1
+    elif  a[l] * a[r] > s - a[l] - a[r]:
+        r -= 1
+    else:
+       print("YES")
+       exit()
+print("NO")
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(n log n)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>Firstly, we sort the array from the smallest to the largest (complexity: n log n). Since our array is sorted, we can apply the two-pointer method. We create two pointers - left and right. In the case where the product ai * aj is greater than the sum of the array - (ai + aj), we move the left pointer to the right. If it's smaller, we move the right pointer to the left. If they are equal, the problem is solved. If the pointers touch, the problem is considered unsolvable.</p>
+
+</body>
+</html>

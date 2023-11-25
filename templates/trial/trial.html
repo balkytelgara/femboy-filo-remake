@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='trial.css') }}">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <div class="container">
+        <div class="head">
+            <h1>{{ title }}</h1>
+        </div>
+        <div class="content">
+            <div class="description">
+                <p>Solution by: {{ author }}</p>
+                {{ description }}
+            </div>
+            <div class="format">
+                <div class="format input">
+                    <h2>Input format: </h2>
+                    {{ input_format }}
+                </div>
+                <div class="format output">
+                    <h2>Output format: </h2>
+                    {{ output_format }}
+                </div>
+            </div>
+            <div class="example">
+                <h2>Examples</h2>
+                <ul>
+                    {% for index, example in enumerate(example_io) %}
+                        <li>
+                            <h2># Test {{index + 1}}</h2>
+                            <hr>
+                            <div class="example io">
+                                <div class="example input">
+                                    <h4>Input:</h4>
+                                    <pre><code class="language-text">{{ example["input"] }}</code></pre>
+                                </div>
+                                <div class="example output">
+                                    <h4>Output:</h4>
+                                    <pre><code class="language-text">{{ example["output"] }}</code></pre>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="solution">
+                <h2>Solution</h2>
+                <pre><code class="language-python">{{ solution }}</code></pre>
+            </div>
+            <div class="efficiency">
+                <h2>Efficiency</h2>
+                <p class="efficiency {{ efficiency_type }}">{{ efficiency }}</p>
+            </div>
+            <div class="complexity">
+                <h2>Complexity</h2>
+                <p>{{ complexity }}</p>
+            </div>
+            <div class="explanation">
+                <h2>Explanation</h2>
+                {{ explanation }}
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</body>
+</html>

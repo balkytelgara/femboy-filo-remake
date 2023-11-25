@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Poppins:wght@400;700&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+code {
+    border-radius: 0.5rem;
+    padding: 1.5rem !important;
+    font: 18px "Fira Code";
+}
+
+.container {
+    margin: 3rem 6rem;
+}
+.head {
+    display: flex;
+    justify-content: center;
+    color: #0174BE;
+}
+.content {
+}
+.description {
+}
+.description p {
+    font-weight: bold;
+}
+.format {
+}
+.format.input {
+}
+.format.output {
+}
+.example {
+}
+.example li {
+    list-style-type: none;
+}
+.example li h2 {
+    text-decoration: underline;
+}
+.example.io {
+    display: flex;
+    gap: 1rem;
+}
+.example.input {
+    flex: 1;
+}
+.example.output {
+    flex: 1;
+}

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task C: Houses</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task C: Houses</h1>
+
+<p>In a row, there are N houses, and the i-th house is located at point xi. A house is considered safe if there is another house at a distance of no more than K. Otherwise, the house is unsafe. The distance between houses i and j is given by |xi − xj |, the absolute value of the difference between xi and xj.</p>
+
+<p>Output the number of houses where it is unsafe.</p>
+
+<h2>Input Format</h2>
+<p>In the first line, there are two integers N and K (1 ≤ N ≤ 10^5, 0 ≤ K ≤ 10^9).</p>
+<p>In the second line, there are N integers x1, x2, · · · , xN (0 ≤ xi ≤ 10^9).</p>
+
+<h2>Output Format</h2>
+<p>Output the number of houses where it is unsafe.</p>
+
+<h2>Example</h2>
+<pre>
+<b>Input:</b>
+6 4
+1 30 9 15 19 3
+<b>Output:</b>
+2
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+houses_amount, safe_distance = [int(num) for num in input().split(" ")]
+
+houses = [int(num) for num in input().split(" ")]
+
+sorted_houses = sorted(houses)
+
+unsafe = 0
+for index, house in enumerate(sorted_houses):
+    if index > 0:
+        if abs(house - sorted_houses[index - 1]) <= safe_distance:
+            continue
+    if index < houses_amount - 1:
+        if abs(house - sorted_houses[index + 1]) <= safe_distance:
+            continue
+    unsafe += 1
+
+print(unsafe)
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(n * log(n)) || O(houses_amount * log(houses_amount))</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The solution sorted the houses to make the calculations easier. Then, it iterates though every house and if it has a safe neighbour uses <code>continue</code> to skip to the next house. If the conditions aren't met, it marks 1 house as unsafe in <code>unsafe</code> variable.</p>
+
+</body>
+</html>

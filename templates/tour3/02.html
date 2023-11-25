@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task B: Alice and Liana</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task B: Alice and Liana</h1>
+
+<p>Alice, being a very experienced programmer, decided to test Liana. Liana was given the sides of a rectangle <code>n</code> and <code>m</code>. Based on these sides, find the minimum number of squares into which it can be cut. If the answer is more than three, then output that the answer is greater than three.</p>
+
+<h2>Input Format</h2>
+<p>In a single line, there are two integers <code>n</code> and <code>m</code> (1 ≤ n, m ≤ 100).</p>
+
+<h2>Output Format</h2>
+<p>If the minimum number of squares is greater than 3, output ">3". Otherwise, output the minimum number of squares into which the rectangle n × m can be cut.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+5 5
+<b>Output:</b>
+1
+</pre>
+
+<pre>
+<b>Input:</b>
+4 6
+<b>Output:</b>
+3
+</pre>
+
+<pre>
+<b>Input:</b>
+7 1
+<b>Output:</b>
+>3
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+width, height = [int(num) for num in input().split(" ")]
+
+def alice_and_liana(width, height):
+    steps = 0
+    while width > 0 or height > 0:
+        steps += 1
+        if steps > 3:
+            return ">3"
+        square_size = max(min(width, height), 1)
+        width = max(width - square_size, 0)
+        height = max(height - square_size, 0)
+    return steps
+
+print(alice_and_liana(width, height))
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(min(max(width, height), 3)) || O(3) in worst case</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The provided code defines a function <code>alice_and_liana</code> that takes the width and height of a rectangle as input and calculates the minimum number of squares needed to cover the entire rectangle. It iteratively subtracts the size of the squares from the remaining width and height until both dimensions become zero. If the number of steps exceeds three, the function returns ">3". The code then calls the function with user-input width and height values and prints the result. The algorithm efficiently determines the minimum number of squares required to cover the rectangle, emphasizing simplicity and readability.</p>
+</body>
+</html>

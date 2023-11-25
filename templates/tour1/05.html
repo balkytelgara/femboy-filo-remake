@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task E: Doner Shop</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task E: Doner Shop</h1>
+
+<p>In the doner shop, 1 portion of doner costs X tenge, 1 liter of ayran costs Y tenge, and a combo (0.5 portion of doner + 0.5 liters of ayran) costs Z tenge. Daulet needs A portions of doner and B liters of ayran. What is the minimum amount of money he needs to achieve this goal? It's okay if he buys more doners or ayran than needed.</p>
+
+<h2>Input Format</h2>
+<p>A single line containing five integers X, Y, Z, A, B (1 ≤ X, Y, Z ≤ 104, 0 ≤ A, B ≤ 105).</p>
+
+<h2>Output Format</h2>
+<p>Output the answer to the problem.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+500 800 600 3 2
+<b>Output:</b>
+2900
+</pre>
+<pre>
+<b>Input:</b>
+1200 1400 500 3 1
+<b>Output:</b>
+3000
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/Mazgagzam">@Mazgagzam</a></h4>
+<pre>
+<code>
+x, y, z, a, b = map(int, input().split())
+
+mn = min(a, b)
+mx = max(a, b)
+
+answer = min(
+    a * x + b * y,
+    mn * z * 2 + ((a - b) * x if a > b else (b - a) * y),
+    mx * 2 * z
+)
+
+print(answer)
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Efficient, passes the tests</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(1)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The solution calculates the minimum amount of money needed to buy the required portions of doner and liters of ayran, considering the cost of individual items and combos.</p>
+
+</body>
+</html>

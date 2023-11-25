@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task B: Coffee Machine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task B: Coffee Machine</h1>
+
+<p>The strange coffee machine works as follows:</p>
+<ul>
+    <li>A cup of coffee costs X tenge.</li>
+    <li>It only accepts bills with denominations of 500 and 1000 tenge.</li>
+    <li>After buying coffee, the money on the account is immediately reset (no change is given, and you cannot buy multiple cups at once). For example, if the coffee costs 100, then with a 1000 tenge bill, you can only buy one cup of coffee. If there are two 500 tenge bills, then you can buy two cups of coffee.</li>
+</ul>
+
+<p>You have A bills with a denomination of 500 and B bills with a denomination of 1000. What is the maximum number of cups of coffee you can buy with this money?</p>
+
+<h2>Input Format</h2>
+<p>In the first line, three integers A, B, and X (0 ≤ A, B ≤ 10^6, 1 ≤ X ≤ 10^6).</p>
+
+<h2>Output Format</h2>
+<p>Output the answer to the problem.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+3 2 1200
+<b>Output:</b>
+2
+</pre>
+<pre>
+<b>Input:</b>
+2 2 315
+<b>Output:</b>
+4
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/Mazgagzam">@Mazgagzam</a></h4>
+<pre>
+<code>
+from math import ceil
+
+a, b, x = map(int, input().split())
+
+mn, mx = min(a, b), max(a, b)
+
+i1 = ceil(x/500)
+i2 = ceil(x/1000)
+i3 = ceil(x/1500)
+
+if x < 1000:
+    print(int(a/i1+b/i2))
+elif x >= 1500:
+    print(
+        (a * 500 + b * 1000) // x
+    )
+else:
+    print(mn//i3+(mx-mn)//(i1 if a == mx else i2))
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(1)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The algorithm finds the quantity of 500 and 1000 tenge bills available.</p>
+<p>Later, it determines how many bills are needed to pay for one cup of coffee.</p>
+
+<p><code>i1</code> - the quantity of 500 tenge bills needed to pay for coffee</p>
+<p><code>i2</code> - the quantity of 1000 tenge bills needed to pay for coffee</p>
+<p><code>i3</code> - the quantity of 1500 tenge bills needed to pay for coffee. 1500 can be represented as 1 bill of 1000 tenge and 1 bill of 500 tenge.</p>
+
+<p>If the coffee price is less than 1000, then the formula used is <code>a//i1 + b//i2</code>, where it calculates the number of bills (500 or 1000) needed to pay for the coffee using integer division.</p>
+
+<p>If the coffee price is greater than or equal to 1500, it calculates the maximum number of cups of coffee that can be bought by dividing the total money by the coffee price.</p>
+
+<p>Otherwise, if the coffee price is between 1000 and 1500, the formula used is <code>mn//i3 + (mx-mn)//(i1 if a == mx else i2)</code> to find the answer.</p>
+
+</body>
+</html>

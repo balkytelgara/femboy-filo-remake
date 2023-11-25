@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problem E: Алиса и команда</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Problem E: Алиса и команда</h1>
+
+<p>Great Alijan, as the head of the course, asks beauties Alisa and Dayana to create the best team for the hackathon.
+According to the rules of the hackathon, you need to create a team exactly of 4 people and assign one role to each.
+It is impossible to participate in project development without: front-end, back-end, mobile developer, and designer.
+They are asking you to figure out the problem. The input data consists of the number of students n (4 ≤ n ≤ 10<sup>5</sup>).
+Then there are n lines consisting of f ronti, backi, mobilei, designi for the i-th student (0 ≤ f ronti, backi, mobilei, designi ≤ 10<sup>9</sup>).</p>
+
+<h2>Input Format</h2>
+<p>The input consists of the number of students n (4 ≤ n ≤ 10<sup>5</sup>).
+Then there are n lines consisting of f ronti, backi, mobilei, designi for the i-th student (0 ≤ f ronti, backi, mobilei, designi ≤ 10<sup>9</sup>).</p>
+
+<h2>Output Format</h2>
+<p>Calculate the strength of the best team on the course.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+6
+17 7 10 1
+15 18 4 9
+6 21 23 13
+13 8 2 17
+19 12 21 12
+6 19 20 20
+<b>Output:</b>
+80
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a> & <a href="https://t.me/@MrStirlitz">@MrStirlitz</a></h4>
+<pre>
+<code>
+from itertools import product
+
+n = int(input())
+
+skills = []
+for i in range(n):
+    skills.append([int(num) for num in input().split()])
+
+start = now()
+
+for i, s in enumerate(skills):
+    s.append(i)
+
+def get_best(skill):
+    so = sorted(skills, key=lambda x: x[skill], reverse=True)[:5]
+    return [[stud[skill], stud[4]] for stud in so]
+
+bests = [get_best(i) for i in range(4)]
+
+best_sum = 0
+for indices in product(range(min(5, n)), repeat=4):
+    selected_skills = [bests[i][indices[i]] for i in range(4)]
+
+    if len(set(s[1] for s in selected_skills)) == 4:
+        best_sum = max(best_sum, sum(s[0] for s in selected_skills))
+
+print(best_sum)
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Efficient enough for the given constraints</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(n * log(n))</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The provided code snippet uses the <code>product</code> function from the <code>itertools</code> module to obtain all possible combinations of student indices for each of the four skills. The limitation <code>min(5, n)</code> ensures that there will be no attempts to select more students than there are in the overall list.</p>
+
+<pre><code>for indices in product(range(min(5, n)), repeat=4):</code></pre>
+
+<p>This line of code iterates through all possible combinations of indices for students with each skill.</p>
+
+<pre><code>selected_skills = [bests[i][indices[i]] for i in range(4)]</code></pre>
+
+<p>For each combination of indices, this line selects students using pre-computed best students for each skill.</p>
+
+<pre><code>if len(set(s[1] for s in selected_skills)) == 4:</code></pre>
+
+<p>This line checks that different students are chosen for each of the four skills.</p>
+
+<pre><code>best_sum = max(best_sum, sum(s[0] for s in selected_skills)):</code></pre>
+
+<p>If the current combination of students leads to a higher sum of skills than the current maximum, the variable <code>best_sum</code> is updated.</p>
+
+
+</body>
+</html>

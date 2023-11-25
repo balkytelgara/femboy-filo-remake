@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task A: Room Area</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task A: Room Area</h1>
+
+<p>Baurzhan is inside a rectangular room. He measured the distances from his position to each side of the room, resulting in values <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code>.</p>
+
+<p>Determine the area of the room.</p>
+
+<h2>Input Format</h2>
+<p>In a single line, there are 4 integers <code>a</code>, <code>b</code>, <code>c</code>, <code>d</code> (1 ≤ a, b, c, d ≤ 100).</p>
+
+<h2>Output Format</h2>
+<p>Output the answer to the problem.</p>
+
+<h2>Example</h2>
+<pre>
+<b>Input:</b>
+2 3 4 5
+<b>Output:</b>
+48
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+a, b, c, d = map(int, input().split())
+width = a + c
+height = b + d
+area = width * height
+print(area)
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(1)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The area of the rectangle is calculated by multiplying the lengths of its sides, so the result is <code>width * height = area</code>, and that is the answer.</p>
+
+</body>
+</html>

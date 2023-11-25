@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICode FAQ</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007bff;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .warning {
+            background-color: #ffeaa7; /* Light orange background */
+            border: 1px solid #fdcb6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        #languageSwitch {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        #languageSwitch:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>ICode FAQ</h1>
+
+    <div class="warning">
+        This is not an offical FAQ page.
+    </div>
+
+    <h4><a href="/solutions">ICode 2022 Solutions</a></h4>
+
+    <button id="languageSwitch" onclick="toggleLanguage()">Switch Language</button>
+
+    <div id="faq">
+        <h2 id="faq_en" hidden>FAQ (English)</h2>
+        <ul id="faq_en_ul" hidden>
+            <li><strong>1. What should I do if I didn't receive a call to check if I'm registered?</strong><br>
+                If you didn't receive a call but received an SMS with a link to the Telegram channel, you are registered.
+                If you didn't receive the link and no one called you, we recommend registering again on the Olympiad website.
+            </li>
+
+            <li><strong>2. How many rounds are there in the Olympiad?</strong><br>
+                There are 3 rounds in the Olympiad, and each round lasts for 3 hours. Two of them are online on the ejudge platform, and the third one is held at AITU.
+            </li>
+
+            <li><strong>3. When will the 1st round of the Olympiad start?</strong><br>
+                The 1st round of the Olympiad will take place on November 26, starting at 11:00 Astana time.
+            </li>
+
+            <li><strong>4. Will the university cover the expenses for the 3rd round trip?</strong><br>
+                No, you will cover the trip expenses yourself.
+            </li>
+
+            <li><strong>5. How many grants will the winners receive?</strong><br>
+                The number of grants is not fixed and depends on the maximum score achieved by participants in the 3rd round.
+            </li>
+
+            <li><strong>6. In which language should I solve the Olympiad problems?</strong><br>
+                You can choose any language among Pascal, Java, Python, and C++.
+            </li>
+        </ul>
+
+        <h2 id="faq_ru">ЧАВО (Russian)</h2>
+        <ul id="faq_ru_ul">
+            <li><strong>1. Что делать, если мне не позвонили, зарегистрирован ли я?</strong><br>
+                Если вам не позвонили, но вам пришла смс-ка с ссылкой на тг-канал, то вы - зарегистрированы. Если же вам не приходила ссылка, и вам не звонили, то советуем заново пройти регистрацию на сайте олимпиады.
+            </li>
+
+            <li><strong>2. Сколько туров в олимпиаде?</strong><br>
+                В олимпиаде 3 тура и каждый из них длится по 3 часа. 2 из них в онлайн режиме на онлайн платформе ejudge, а 3 в стенах АИТУ.
+            </li>
+
+            <li><strong>3. Когда начнется 1 тур олимпиады?</strong><br>
+                1 тур олимпиады пройдет 26 ноября, с 11:00 по времени Астаны.
+            </li>
+
+            <li><strong>4. Поездка на 3 тур будет оплачена университетом?</strong><br>
+                Нет, поездку вы оплачиваете сами, за свой счёт.
+            </li>
+
+            <li><strong>5. Сколько грантов получат победители?</strong><br>
+                Количество грантов не фиксировано, зависит от максимально набранного балла участниками на 3 туре.
+            </li>
+
+            <li><strong>6. На каком языке нужно решать олимпиадные задачи?</strong><br>
+                Язык вы выбираете на свой выбор, среди Pascal, Java, Python, C++.
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var curr_lang = 'ru';
+
+        const ru_faq = document.querySelector("#faq_ru")
+        const en_faq = document.querySelector("#faq_en")
+        const ru_faq_ul = document.querySelector("#faq_ru_ul")
+        const en_faq_ul = document.querySelector("#faq_en_ul")
+
+        function toggleLanguage() {
+            if (curr_lang == "en") {
+                curr_lang = "ru";
+            } else {
+                curr_lang = "en";
+            }
+
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            if (curr_lang == "en") {
+                ru_faq.hidden = true;
+                ru_faq_ul.hidden = true;
+                en_faq.hidden = false;
+                en_faq_ul.hidden = false;
+            } else {
+                ru_faq.hidden = false;
+                ru_faq_ul.hidden = false;
+                en_faq.hidden = true;
+                en_faq_ul.hidden = true;
+            }
+        }
+    </script>
+</body>
+</html>

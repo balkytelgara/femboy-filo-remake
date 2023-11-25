@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task G: Oil Pumping</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+    <script type="text/javascript" async
+    src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>  
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task G: Oil Pumping</h1>
+
+<p>An oil field has a rectangular shape and consists of fields organized in N rows and M columns. Fields containing oil are denoted by digits from 0 to 9, which also indicate the amount of oil that can be extracted from the field, while the remaining fields are denoted by the symbol '.'.</p>
+
+<p>The drilling rig works as follows: we first choose a column, build a tower in this column (above ground), and drill down through the entire column, passing through possibly one or more layers of oil.</p>
+
+<p>After we make the boreholes, the process of pumping oil begins. During this process, all the oil is pumped out of each basin (a set of connected oil fields) through which the drilling rig passes. In other words, oil will be pumped out of each field that can be used to reach the field through which the drilling rig passes, moving up, down, left, or right, so that we only go through fields marked with numbers.</p>
+
+<p>Write a program that, for a given oil field and each integer K ≤ M, determines the maximum possible total mass of oil that can be pumped by making no more than K oil wells.</p>
+
+<h2>Input Format</h2>
+<p>The first line of input contains integers N and M (1 ≤ N, M ≤ 2000) - the number of rows and columns.</p>
+<p>Each of the following N lines contains an array of M characters '.' or '0'-'9' - the description of the table.</p>
+
+<h2>Output Format</h2>
+<p>The output should contain M integers, where the K-th number denotes the maximum possible amount of oil that can be pumped if we can make no more than K oil wells.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+5 5
+...3.
+....1
+..0.3
+489..
+.....
+<b>Output:</b>
+21
+25
+28
+28
+28
+</pre>
+
+<pre>
+<b>Input:</b>
+3 5
+999.1
+.....
+1.999
+<b>Output:</b>
+54
+56
+56
+56
+56
+</pre>
+
+<pre>
+<b>Input:</b>
+5 5
+.27..
+7.063
+....7
+78...
+8...2
+<b>Output:</b>
+48
+57
+57
+57
+57
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+height, width = [int(num) for num in input().split(" ")]
+grid = []
+for _ in range(height):
+    grid.append(list(input()))
+
+groups = []
+known_cells = set()
+xes = [0] * width
+
+def get_oil(y, x):
+    if (y, x) in known_cells:
+        return False
+    if x < 0 or y < 0 or\
+       x >= width or y >= height:
+        return False
+    cell = grid[y][x]
+    if cell == '.':
+        return False
+    return int(cell)
+
+current_group_xes = set()
+def discover_group(y, x) -> int:
+    global current_group_xes
+    is_oil = get_oil(y, x)
+    if not is_oil or (y, x) in known_cells:
+        return 0
+    known_cells.add((y, x))
+    current_group_xes.add(x)
+    return sum((
+        is_oil,
+        discover_group(y, x + 1),
+        discover_group(y + 1, x),
+        discover_group(y, x - 1),
+        discover_group(y - 1, x),
+    ))
+
+for x in range(height):
+    for y in range(width):
+        discover = discover_group(y, x)
+        if discover:
+            for x in current_group_xes:
+                xes[x] += discover
+                break
+            current_group_xes = set()
+
+xes = sorted(xes, reverse=True)
+for i in range(1, 6):
+    print(sum(xes[:i]))
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-good">Barely passes all tests.</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: \(O(N \times M^2 \log M)\)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>In this oil pumping problem, we aim to determine the maximum possible total mass of oil that can be pumped by making no more than K oil wells in a given oil field. The algorithm employs a method of identifying connected basins of oil fields and calculating the total oil mass that can be pumped from these basins.</p>
+
+<h2>Algorithm Overview:</h2>
+
+<p>1. <strong>Grid Initialization:</strong> The input specifies the dimensions of the oil field (height and width), and a grid is created to represent the field. Each cell in the grid contains a character '.' or a digit '0'-'9', indicating the presence of oil and its mass.</p>
+
+<p>2. <strong>Basin Discovery:</strong> The algorithm iterates through each cell of the grid, identifying connected basins of oil fields. The <code>discover_group</code> function is responsible for recursively exploring and marking the cells of a connected basin, updating a set of known cells and a set of x-coordinates for the discovered group.</p>
+
+<pre>
+<code>
+def get_oil(y, x):
+    if (y, x) in known_cells:
+        return False
+    if x < 0 or y < 0 or\
+       x >= width or y >= height:
+        return False
+    cell = grid[y][x]
+    if cell == '.':
+        return False
+    return int(cell)
+
+current_group_xes = set()
+def discover_group(y, x) -> int:
+    global current_group_xes
+    is_oil = get_oil(y, x)
+    if not is_oil or (y, x) in known_cells:
+        return 0
+    known_cells.add((y, x))
+    current_group_xes.add(x)
+    return sum((
+        is_oil,
+        discover_group(y, x + 1),
+        discover_group(y + 1, x),
+        discover_group(y, x - 1),
+        discover_group(y - 1, x),
+    ))
+</code>
+</pre>
+
+<p>3. <strong>Oil Mass Calculation:</strong> For each discovered basin, the algorithm calculates the total oil mass that can be pumped from the basin. It then updates an array of x-coordinates representing the columns of the grid where the oil wells are located.</p>
+
+<pre>
+<code>
+for x in range(height):
+    for y in range(width):
+        discover = discover_group(y, x)
+        if discover:
+            for x in current_group_xes:
+                xes[x] += discover
+                break
+            current_group_xes = set()
+</code>
+</pre>
+
+<p>4. <strong>Output:</strong> Finally, the algorithm sorts the array of x-coordinates in descending order and prints the cumulative oil mass for the top K oil wells, for K ranging from 1 to 5 in the given example.</p>
+
+<pre>
+<code>
+xes = sorted(xes, reverse=True)
+for i in range(1, 6):
+    print(sum(xes[:i]))
+</code>
+</pre>
+
+<p>This approach allows the algorithm to efficiently identify and calculate the maximum oil mass that can be pumped with a limited number of oil wells.</p>
+
+</body>
+</html>

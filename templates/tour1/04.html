@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task D: Division by 3</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task D: Division by 3</h1>
+
+<p>Given a positive integer N. What is the minimum number of digits that need to be crossed out from N to make the remaining number divisible by 3 without a remainder?</p>
+
+<h2>Input Format</h2>
+<p>A single line containing one integer N (10 ≤ N ≤ 10^9).</p>
+
+<h2>Output Format</h2>
+<p>Output the answer to the problem.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+12
+<b>Output:</b>
+0
+</pre>
+<pre>
+<b>Input:</b>
+148
+<b>Output:</b>
+1
+</pre>
+<pre>
+<b>Input:</b>
+10
+<b>Output:</b>
+1
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/Mazgagzam">@Mazgagzam</a></h4>
+<pre>
+<code>
+num = input()
+
+def solution(num):
+    modulo = int(num) % 3
+    if modulo == 0:
+        return 0
+    else:
+        for char in num:
+            if int(char) % 3 == modulo:
+                return 1
+    return 2
+
+print(solution(num))
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Efficient, passes the tests</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(n)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The solution calculates the minimum number of digits to be crossed out to make the remaining number divisible by 3 without a remainder.</p>
+
+</body>
+</html>

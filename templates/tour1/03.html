@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task C: Fairy Tales</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task C: Fairy Tales</h1>
+
+<p>Little Kuanys was reading a collection of Kazakh fairy tales and came across the following story: Khan invited Kozhanasyr and asked him: "Kozheke, here is one som and one tiyn. Tell me, which one is more?" After thinking a little, Kozha said: "Of course, one tiyn is more. Why do you think so? Because one som has six letters. And in one tiyn there are seven letters. Well, think for yourself, which is more, six or seven?" After this story, Kuanys began to ponder such a question: "If we ask Kozhanasyr what is more, a som or b tiyn, what will he answer?" Help to find the answer to this question.</p>
+
+<h2>Input Format</h2>
+<p>A single line containing two integers a, b (1 ≤ a, b ≤ 9).</p>
+
+<h2>Output Format</h2>
+<p>When comparing like Kozhanasyr, if a som is greater, output '>', if b tiyn is greater, output '<', if they are equal, then output '='. Output without quotes.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+1 1
+<b>Output:</b>
+<
+</pre>
+<pre>
+<b>Input:</b>
+9 5
+<b>Output:</b>
+>
+</pre>
+<pre>
+<b>Input:</b>
+2 3
+<b>Output:</b>
+=
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/Mazgagzam">@Mazgagzam</a></h4>
+<pre>
+<code>
+nums = [0, 3, 3, 2, 4, 3, 4, 4, 5, 5]
+
+c1, c2 = [nums[int(num)] for num in input().split(" ")]
+c2 += 1
+if c1 > c2:
+    print(">")
+elif c1 < c2:
+    print("<")
+else:
+    print("=")
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(1)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The solution compares the number of letters in the Kazakh words for the given values of a and b.</p>
+
+</body>
+</html>

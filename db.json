@@ -1,0 +1,111 @@
+{
+	"solutions": {
+		"trial": {
+			"1": {
+				"title": "Problem A: Very Easy Task",
+				"description": "Find the sum of two integers, a + b.",
+				"author": "@wilbursoot_fan",
+				"input-format": "Two integers a and b (-1000 \u2264 a, b \u2264 1000).",
+				"output-format": "Output a single integer - the answer to the problem.",
+				"example-io": [
+					{
+						"input": "2 3", 
+						"output": "5"
+					}
+				],
+				"solution": "n, m = [int(st) for st in input().split()]\nprint(n + m)",
+				"efficiency": ["best", "Very efficient, passes the tests easily"],
+				"complexity": "Time complexity: O(1)",
+				"explanation": "The solution calculates the sum of two integers, a + b."
+			},
+			"2": {
+				"title": "Problem B: Alina and the Gold Scroll",
+				"description": "Alina has a gold scroll in the shape of a parallelepiped, with a height a mm, width b mm, and length c mm. Find the volume of the parallelepiped.",
+				"author": "@wilbursoot_fan",
+				"input-format": "Three integers a, b, and c (1 \u2264 a, b, c \u2264 100) - the dimensions of the parallelepiped.",
+				"output-format": "Output the answer to the problem.",
+				"example-io": [
+					{
+						"input": "2 2 2",
+						"output": "8"
+					}
+				],
+				"solution": "n, m, e = [int(st) for st in input().split()]\nprint(n * m * e)",
+				"efficiency": ["best", "Very efficient, passes the tests easily"],
+				"complexity": "Time complexity: O(1)",
+				"explanation": "The solution calculates the volume of the parallelepiped using the formula: volume = length \u00D7 width \u00D7 height."
+			},
+			"3": {
+				"title": "Problem C: Multiplication Table",
+				"description": "Little Esmakhan has recently learned the multiplication table, and now he can multiply numbers from 1 to 9. He cannot multiply numbers greater than 9.\nIf Esmakhan can calculate A \u00D7 B, output the result; otherwise, output -1.",
+				"author": "@wilbursoot_fan",
+				"input-format": "Two integers A, B (1 \u2264 A, B \u2264 20).",
+				"output-format": "Output the answer to the problem.",
+				"example-io": [
+					{
+						"input": "3 7",
+						"output": "21"
+					},
+					{
+						"input": "10 4",
+						"output": "-1"
+					},
+					{
+						"input": "15 10",
+						"output": "-1"
+					}
+				],
+				"solution": "n, m = [int(st) for st in input().split()]\nif n < 1 or m < 1 or n > 9 or m > 9:\n  print(-1)\nelse:\n  print(n * m)",
+				"efficiency": ["best", "Very efficient, passes the tests easily"],
+				"complexity": "Time complexity: O(1)",
+				"explanation": "The solution checks if the input numbers are within the valid range (1 to 9) and outputs their product if valid, otherwise outputs -1."
+			},
+			"4": {
+				"title": "Problem D: Blackjack",
+				"description": "There are three integers a, b, c. If a + b + c is less than or equal to 21, output \"Winner, winner, chicken dinner.\" Otherwise, output \"play again.\"",
+				"author": "@wilbursoot_fan",
+				"input-format": "Three integers a, b, c (1 \u2264 a, b, c \u2264 13).",
+				"output-format": "Output the answer to the problem.",
+				"example-io": [
+					{
+						"input": "7 7 7",
+						"output": "Winner, winner, chicken dinner."
+					},
+					{
+						"input": "10 8 5",
+						"output": "play again."
+					}
+				],
+				"solution": "n, m, e = [int(st) for st in input().split()]\nif sum([n, m, e]) <= 21:\n  print(\"Winner, winner, chicken dinner.\")\nelse:\n  print(\"play again.\")",
+				"efficiency": ["best", "Very efficient, passes the tests easily"],
+				"complexity": "Time complexity: O(1)",
+				"explanation": "The solution checks if the sum of the three input integers is less than or equal to 21 and outputs the corresponding result."
+			},
+			"5": {
+				"title": "Problem E: Number of divisions",
+				"description": "Given a positive integer N, find the number of its divisors.",
+				"author": "@wilbursoot_fan",
+				"input-format": "One integer N (1 \u2264 N \u2264 10\u00B9\u00B2).",
+				"output-format": "Output the answer to the problem.",
+				"example-io": [
+					{
+						"input": "24",
+						"output": "8"
+					},
+					{
+						"input": "25",
+						"output": "3"
+					},
+					{
+						"input": "1000000009",
+						"output": "2"
+					}
+				],
+				"solution": "n = int(input())\n\ndef get_divisors(n):\n  divisors = set()\n  i = 1\n\n  while i * i <= n:\n    if n % i == 0:\n      divisors.add(i)\n      divisors.add(n // i)\n    i += 1\n\n  return len(divisors)\n\nprint(get_divisors(n))",
+				"efficiency": ["best", "Very efficient, passes the tests easily"],
+				"complexity": "Time complexity: O(√N)",
+				"explanation": "The solution calculates the number of divisors by iterating up to the square root of N and adding divisors when found."
+			}
+		}
+	}
+}

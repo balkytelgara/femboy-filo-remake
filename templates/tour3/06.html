@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task F: Triplets of Numbers</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .warning {
+            background-color: #ffeaa7; /* Light orange background */
+            border: 1px solid #fdcb6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task F: Triplets of Numbers</h1>
+
+<p>Given an array <code>a</code> consisting of N positive integers, find the number of triplets (i < j < k) such that ai = ak and ai < aj.</p>
+
+<h2>Input Format</h2>
+<p>In the first line, there is a single integer N (1 ≤ N ≤ 300,000).</p>
+<p>In the second line, there are N integers a1, a2, · · · , aN (1 ≤ ai ≤ N).</p>
+
+<h2>Output Format</h2>
+<p>Output the answer to the problem.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+6
+2 3 2 1 3 2
+<b>Output:</b>
+4
+</pre>
+
+<pre>
+<b>Input:</b>
+10
+1 2 1 2 3 1 2 1 3 1
+<b>Output:</b>
+28
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+array_size = int(input("Array size: "))
+array = [int(num) for num in input("Array values: ").split(" ")]
+
+def convert_pairs(pair_list):
+    new_pairs = []
+    for pair in pair_list:
+        new_pairs.append((array[pair[0]], array[pair[1]]))
+    return new_pairs
+
+def get_pairs(values):
+    index_pairs = []
+    length = len(values)
+    for index in range(length - 1):
+        for index_2 in range(index + 1, length):
+            index_pairs.append((values[index], values[index_2]))
+    return index_pairs
+
+nums_dict = {}
+for index, num in enumerate(array):
+    if num in nums_dict:
+        nums_dict[num].append(index)
+    else:
+        nums_dict[num] = [index]
+
+pairs = []
+for pair_key, values in nums_dict.items():
+    if len(values) < 2:
+        continue
+    pairs_indexes = get_pairs(values)
+    pairs.append((pair_key, pairs_indexes))
+
+triplets = 0
+for pair_key, indexes in pairs:
+    for indexes_pair in indexes:
+        for index in range(indexes_pair[0] + 1, indexes_pair[1]):
+            if array[index] > pair_key:
+                triplets += 1
+
+print(triplets)
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-bad">The provided algorithm may not be efficient enough for arrays larger than 5,000 elements within the time limit. (the array might be up 300,000 elements)</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(n^2)</p>
+
+<p><strong>Explanation:</strong></p>
+<p>To solve this problem, we start by creating a dictionary, <code>nums_dict</code>, to store the indices of occurrences of each number in the input array <code>a</code>. This allows us to efficiently retrieve the indices for each unique number.</p>
+<p>For each number that appears more than once, we generate pairs of indices representing possible combinations of triplets. We achieve this using the <code>get_pairs</code> function, which iterates through the indices and forms pairs such that <code>i < j</code>. These pairs represent potential triplets where <code>ai = ak</code> and <code>ai < aj</code>.</p>
+<p>We then iterate through these pairs, checking if there exists an index <code>k</code> such that <code>ai = ak</code> and <code>ai < aj</code>. If such a condition is met, we increment the count of triplets. This process ensures that we count all valid triplets in the array.</p>
+<p>Finally, the program outputs the total count of triplets found</p>
+
+</body>
+</html>

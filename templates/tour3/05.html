@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task E: Meeting Point</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task E: Meeting Point</h1>
+
+<p>In the beautiful capital of Kazakhstan, Astana, participants of the school programming olympiad ICODE are enthusiastically preparing for the competitions scheduled for April 30 at Astana IT University. Since Astana is a huge city, all olympiad participants will be moving around using the light rail transit (LRT), which offers a diverse network of N circular lines, each with its own set of unique stops.</p>
+
+<p>The olympiad participants have decided to take on an individual challenge: each of them will independently go to the venue of the olympiad - stop number X, where Astana IT University is located. They stay in hotels located near LRT stations and start their journey from these stops.</p>
+
+<p>To complete this challenge, each participant needed to overcome the LRT lines and make transfers at intersecting stops. The goal was to minimize the number of transfers they had to make to eventually reach stop number X.</p>
+
+<p>In this exciting journey, you are their guide, and your task is to help each participant navigate the complex LRT lines of Astana. Your mission is to determine the minimum number of transfers each participant needs to arrive at the special place.</p>
+
+<p>Can you help them pass their personal challenge and get to the ICODE school olympiad waiting for them at stop number X?</p>
+
+<h2>Input Format</h2>
+<p>The first line contains two integers N and X (1 ≤ N, X ≤ 5·10^5), representing the number of LRT lines and the number of the Astana IT University stop, respectively.</p>
+
+<p>The next N lines contain a list of integers separated by spaces, describing the stops of the corresponding LRT line. Each list starts with the number of k stops on the line, followed by k numbers in the range from 1 to 5·10^5, indicating the stops.</p>
+
+<p>There are no more than 5·10^5 numbers in total in N lines describing the LRT lines.</p>
+
+<p>The (N + 1)-th line contains an integer P (1 ≤ P ≤ 5 · 10^5), representing the number of olympiad participants.</p>
+
+<p>The last line contains P integers separated by spaces, where each integer (in the range from 1 to 5·10^5) represents the starting stop of each participant.</p>
+
+<h2>Output Format</h2>
+<p>Output P integers separated by spaces. For each participant, output the minimum number of transfers required to reach stop number X (where Astana IT University is located).</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+3 5
+5 1 2 3 4 5
+4 5 6 7 8
+3 8 9 10
+4
+1 3 9 7
+<b>Output:</b>
+0 0 1 0
+</pre>
+
+<pre>
+<b>Input:</b>
+6 1
+2 1 2
+3 4 5 6
+2 2 6
+3 7 8 9
+2 6 10
+3 3 6 9
+10
+1 2 3 4 5 6 7 8 9 10
+<b>Output:</b>
+0 0 2 2 2 1 3 3 2 2
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/wilbursoot_fan">@wilbursoot_fan</a></h4>
+<pre>
+<code>
+number_of_lines, end_stop = [int(num) for num in input().split(" ")]
+
+end_lines = []
+weights = {}
+lines = {}
+stops_entaglement = {}
+
+# Lines input. Creation of `lines`, `stops_entaglement`, `weights`, `end_lines` variables
+for line in range(number_of_lines):
+    line_stops = [int(num) for num in input().split(" ")[1:]]
+    line += 1
+    stops_weight = None
+    if end_stop in line_stops:
+        stops_weight = 0
+        end_lines.append(line)
+    
+    for stop in line_stops:
+        if stops_entaglement.get(stop):
+            stops_entaglement[stop].append(line)
+        else:
+            stops_entaglement[stop] = [line]
+
+    if stops_weight is not None:
+        weights[line] = stops_weight
+    
+    lines[line] = line_stops
+
+def find_neighbours(line):
+    """Finds the neighbouring lines of provided line"""
+    neighbour_lines = set()
+    for stop in lines[line]:
+        for sub_stop in stops_entaglement[stop]:
+            neighbour_lines.add(sub_stop)
+    neighbour_lines.remove(line)
+    return neighbour_lines
+
+# Iterative fill of `weights` dictionary based on neighbouring lines
+known_lines = set(end_lines)
+weight = 0
+while len(known_lines) < number_of_lines:
+    weight += 1
+    new_known_lines = []
+    for line in known_lines:
+        neighbours = find_neighbours(line)
+        for n_line in neighbours:
+            if weights.get(n_line) is not None:
+                continue
+            weights[n_line] = weight
+            new_known_lines.append(n_line)
+    for line in new_known_lines:
+        known_lines.add(line)
+
+input() # Students amount, unused variable
+
+members = [int(num) for num in input().split(" ")]
+
+# Outputing fastest routs for every student
+for start_node in members:
+    fastest = None
+    for line in stops_entaglement[start_node]:
+        line_weight = weights[line]
+        if fastest is None or line_weight < fastest:
+            fastest = line_weight
+    print(fastest, end=" ")
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Very efficient, passes the tests easily</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(number_of_lines^2 + number_of_students * average_lines_per_stop) || O(10^10) in the worst case</p>
+
+<p><strong>Explanation:</strong></p>
+<p>Alright, here's the solution approach:</p>
+
+<ol>
+    <li>Establish connections between stops.</li>
+    <li>Compute the number of transfers needed to reach the final stop for each ring.</li>
+    <li>Determine the shortest path for each student using the precomputed data.</li>
+</ol>
+
+<p>Firstly, we process the rings and stops. The input includes the number of rings and the final stop (where everyone needs to reach).</p>
+
+<p>During the input processing of ring data, we simultaneously handle all the information. While processing each ring, we:</p>
+
+<ul>
+    <li>Record the stop numbers for the ring in the dictionary 'lines' in the format {line_index: [stop1, stop2, ...]}.</li>
+    <li>Associate stops with rings in the dictionary 'stops_entaglement' in the format {stop: [line1, line2, ...]}.</li>
+</ul>
+
+<p>Additionally, we identify which rings contain the final stop. Simultaneously, we note that for final rings, the shortest path will have 0 transfers since the stop is already present in the ring. We store this information in the 'weights' dictionary, which has the format {line: smallest_number_of_transfers}.</p>
+
+<p>Next, we perform an iterative computation of the shortest paths to the final stop. This is done through a straightforward scheme:</p>
+
+<ol>
+    <li>We start with the final ring(s) and, with each iteration, kind of "expand" by capturing neighboring stops.</li>
+    <li>The number of transfers for the current iteration of the loop is considered the shortest path. Iterations continue until the length of the 'known_lines' dictionary matches the number of rings. 'known_lines' contains the already processed lines whose shortest paths are known.</li>
+</ol>
+
+<p>Finally, all that's left is to utilize our list of shortest paths depending on the ring - 'weights' and figure out where the student is better off starting and how many transfers the trip will take.</p>
+
+</body>
+</html>

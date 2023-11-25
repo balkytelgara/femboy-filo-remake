@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task B: Coffee Machine</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f8f8f8;
+            color: #333;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        p {
+            line-height: 1.6;
+        }
+
+        code {
+            background-color: #f0f0f0;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        pre {
+            background-color: #f0f0f0;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .pass-bad {
+            background-color: #ffa7a7; /* Light orange background */
+            border: 1px solid #fd6e6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-good {
+            background-color: #f8ffa7; /* Light orange background */
+            border: 1px solid #e8fd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+
+        .pass-best {
+            background-color: #b3ffa7; /* Light orange background */
+            border: 1px solid #8dfd6e; /* Border color */
+            padding: 10px; /* Padding around the warning message */
+            border-radius: 4px; /* Rounded corners */
+            margin-bottom: 10px; /* Space below the warning */
+        }
+    </style>
+</head>
+<body>
+
+<a href="/solutions">Go back</a>
+<h1>Task B: Coffee Machine</h1>
+
+<p>The strange coffee machine works as follows:</p>
+<ul>
+    <li>A cup of coffee costs X tenge.</li>
+    <li>It only accepts bills with denominations of 500 and 1000 tenge.</li>
+    <li>After buying coffee, the money in the account is immediately reset (no change is given, and you cannot buy multiple cups at once).</li>
+    <li>For example, if the coffee costs 100, then with a 1000 tenge bill, you can only buy one cup of coffee. If there are two 500 tenge bills, then you can buy two cups of coffee.</li>
+</ul>
+
+<p>You have A bills with a denomination of 500 and B bills with a denomination of 1000. What is the maximum number of cups of coffee you can buy with this money?</p>
+
+<h2>Input Format</h2>
+<p>In the first line, three integers A, B, and X (0 ≤ A, B ≤ 10^6, 1 ≤ X ≤ 10^6).</p>
+
+<h2>Output Format</h2>
+<p>Output the answer to the problem.</p>
+
+<h2>Examples</h2>
+<pre>
+<b>Input:</b>
+3 2 1200
+<b>Output:</b>
+2
+</pre>
+<pre>
+<b>Input:</b>
+2 2 315
+<b>Output:</b>
+4
+</pre>
+
+<h2>Solution</h2>
+<h4>Author: <a href="https://t.me/Mazgagzam">@Mazgagzam</a></h4>
+<pre>
+<code>
+name = input().strip()
+surname = input().strip()
+
+s = set()
+
+for a in range(1, len(name) + 1):
+    for b in range(1, len(surname) + 1):
+        s.add(name[:a] + surname[-b:])
+
+print(len(s))
+</code>
+</pre>
+
+<p><strong>Is it efficient enough?</strong></p>
+<p class="pass-best">Efficient, passes the tests</p>
+
+<p><strong>Complexity:</strong></p>
+<p>Time complexity: O(N^2), where N is the length of the names</p>
+
+<p><strong>Explanation:</strong></p>
+<p>The solution generates all possible combinations of prefixes of the name and suffixes of the surname and counts the unique combinations.</p>
+
+</body>
+</html>

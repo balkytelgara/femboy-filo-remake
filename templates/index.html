@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filo Iwatani</title>
+    <link rel="icon" href="{{ url_for('static', filename='avatar.jpg') }}" type="image/png" sizes="16x16 32x32 64x64">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        body {
+            background-image: url('{{ url_for("static", filename="bg.png") }}');
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="left-section">
+        <img src="{{ url_for('static', filename='avatar.jpg') }}" alt="My avatar" class="profile-picture">
+
+        <div class="name">Filo Iwatani</div>
+
+        <div class="short-bio">
+            <div class="info-container">
+                Web Developer
+                <div class="info-circle">?</div>
+                <div class="info-text">
+                    Approved by spiders and blek!
+                </div>
+            </div>
+        </div>
+        <div class="description">
+            Passionate about fancy linux terminals.<br>
+            Check out my <a href="https://urlshort.xyz">URL shortener</a>!
+        </div>
+
+        <div class="social-links">
+            <a href="https://github.com/Filo6699" class="social-link" target="_blank">GitHub</a>
+            <a href="https://discord.com/users/506065061815779329" class="social-link" target="_blank">Discord</a>
+            <a href="https://t.me/wilbursoot_fan" class="social-link" target="_blank">Telegram</a>
+        </div>
+    </div>
+
+    <div class="separator-section">
+        <div class="separator-line"></div>
+    </div>
+
+    <div class="right-section">
+        <div>
+            <p>
+                Hello! This is our page. Who are "us"? Its me and you obviosly.
+                Since you are a part of this, you can leave any silly comment here.
+            </p>
+            <div class="message-container"><p class="last-message">Last comment: </p><p class="message">{{ message }}</p></div>
+            <form action="/submit" method="post">
+                <input class="message-input" placeholder="Your message" type="text" id="message" maxlength="128" name="message" required>
+                <br>
+                <button class="button" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
